@@ -17,18 +17,22 @@ public class TrackRecommendation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name ="track_id")
+    private long trackId;
     @Column(name = "user_id")
     private long userId;
 
     private Boolean liked;
 
-    public TrackRecommendation(Long id, long userId, Boolean liked) {
+    public TrackRecommendation(Long id, long trackId, long userId, Boolean liked) {
         this.id = id;
+        this.trackId = trackId;
         this.userId = userId;
         this.liked = liked;
     }
 
-    public TrackRecommendation(long userId, Boolean liked) {
+    public TrackRecommendation(long trackId, long userId, Boolean liked) {
+        this.trackId = trackId;
         this.userId = userId;
         this.liked = liked;
     }
@@ -42,6 +46,14 @@ public class TrackRecommendation implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public long getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(long trackId) {
+        this.trackId = trackId;
     }
 
     public long getUserId() {
@@ -65,18 +77,19 @@ public class TrackRecommendation implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TrackRecommendation that = (TrackRecommendation) o;
-        return userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
+        return trackId == that.trackId && userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, liked);
+        return Objects.hash(id, trackId, userId, liked);
     }
 
     @Override
     public String toString() {
-        return "TrackRecomendation{" +
+        return "TrackRecommendation{" +
                 "id=" + id +
+                ", trackId=" + trackId +
                 ", userId=" + userId +
                 ", liked=" + liked +
                 '}';

@@ -20,25 +20,25 @@ public class LabelRecommendation implements Serializable {
     @Column(name = "label_id")
     private long labelId;
 
-    @Column(name = "artist_id")
-    private long artistId;
+    @Column(name = "user_id")
+    private long userId;
 
     private Boolean liked;
 
-    public LabelRecommendation(Long id, long labelId, long artistId, Boolean liked) {
+    public LabelRecommendation() {
+    }
+
+    public LabelRecommendation(Long id, long labelId, long userId, Boolean liked) {
         this.id = id;
         this.labelId = labelId;
-        this.artistId = artistId;
+        this.userId = userId;
         this.liked = liked;
     }
 
-    public LabelRecommendation(long labelId, long artistId, Boolean liked) {
+    public LabelRecommendation(long labelId, long userId, Boolean liked) {
         this.labelId = labelId;
-        this.artistId = artistId;
+        this.userId = userId;
         this.liked = liked;
-    }
-
-    public LabelRecommendation() {
     }
 
     public Long getId() {
@@ -57,12 +57,12 @@ public class LabelRecommendation implements Serializable {
         this.labelId = labelId;
     }
 
-    public long getArtistId() {
-        return artistId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setArtistId(long artistId) {
-        this.artistId = artistId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public Boolean getLiked() {
@@ -78,20 +78,20 @@ public class LabelRecommendation implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LabelRecommendation that = (LabelRecommendation) o;
-        return labelId == that.labelId && artistId == that.artistId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
+        return labelId == that.labelId && userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, labelId, artistId, liked);
+        return Objects.hash(id, labelId, userId, liked);
     }
 
     @Override
     public String toString() {
-        return "LabelRecomendation{" +
+        return "LabelRecommendation{" +
                 "id=" + id +
                 ", labelId=" + labelId +
-                ", artistId=" + artistId +
+                ", userId=" + userId +
                 ", liked=" + liked +
                 '}';
     }

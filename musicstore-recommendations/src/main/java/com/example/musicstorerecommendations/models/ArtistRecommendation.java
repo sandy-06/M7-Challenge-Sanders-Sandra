@@ -16,7 +16,7 @@ public class ArtistRecommendation implements Serializable {
     private Long id;
     @Column(name = "artist_id")
     private long artistId;
-    @Column(name = "u")
+    @Column(name = "user_id")
     private long userId;
     private Boolean liked;
 

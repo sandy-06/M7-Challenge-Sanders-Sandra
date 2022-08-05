@@ -17,18 +17,22 @@ public class AlbumRecommendation implements Serializable {
 
     private Long id;
 
+    @Column (name = "album_id")
+    private long albumId;
     @Column(name = "user_id")
     private long userId;
 
     private Boolean liked;
 
-    public AlbumRecommendation(Long id, long userId, Boolean liked) {
+    public AlbumRecommendation(Long id, long albumId, long userId, Boolean liked) {
         this.id = id;
+        this.albumId = albumId;
         this.userId = userId;
         this.liked = liked;
     }
 
-    public AlbumRecommendation(long userId, Boolean liked) {
+    public AlbumRecommendation(long albumId, long userId, Boolean liked) {
+        this.albumId = albumId;
         this.userId = userId;
         this.liked = liked;
     }
@@ -42,6 +46,14 @@ public class AlbumRecommendation implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(long albumId) {
+        this.albumId = albumId;
     }
 
     public long getUserId() {
@@ -65,23 +77,21 @@ public class AlbumRecommendation implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AlbumRecommendation that = (AlbumRecommendation) o;
-        return userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
+        return albumId == that.albumId && userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, liked);
+        return Objects.hash(id, albumId, userId, liked);
     }
 
     @Override
     public String toString() {
-        return "AlbumRecomendation{" +
+        return "AlbumRecommendation{" +
                 "id=" + id +
+                ", albumId=" + albumId +
                 ", userId=" + userId +
                 ", liked=" + liked +
                 '}';
     }
-
-
-
 }
