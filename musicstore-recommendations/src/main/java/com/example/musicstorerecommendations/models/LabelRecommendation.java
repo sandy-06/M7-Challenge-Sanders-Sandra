@@ -5,15 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "label_recommendation")
-public class LabelRecomendation implements Serializable {
+public class LabelRecommendation implements Serializable {
     @Id
     @Column(name = "label_recommendation_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +25,20 @@ public class LabelRecomendation implements Serializable {
 
     private Boolean liked;
 
-    public LabelRecomendation(Long id, long labelId, long artistId, Boolean liked) {
+    public LabelRecommendation(Long id, long labelId, long artistId, Boolean liked) {
         this.id = id;
         this.labelId = labelId;
         this.artistId = artistId;
         this.liked = liked;
     }
 
-    public LabelRecomendation(long labelId, long artistId, Boolean liked) {
+    public LabelRecommendation(long labelId, long artistId, Boolean liked) {
         this.labelId = labelId;
         this.artistId = artistId;
         this.liked = liked;
     }
 
-    public LabelRecomendation() {
+    public LabelRecommendation() {
     }
 
     public Long getId() {
@@ -80,7 +77,7 @@ public class LabelRecomendation implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LabelRecomendation that = (LabelRecomendation) o;
+        LabelRecommendation that = (LabelRecommendation) o;
         return labelId == that.labelId && artistId == that.artistId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
     }
 

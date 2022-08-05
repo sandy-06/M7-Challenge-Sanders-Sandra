@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "artist_recommendation")
-public class ArtistRecomendation implements Serializable {
+public class ArtistRecommendation implements Serializable {
     @Id
     @Column(name = "artist_recommendation_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,20 +20,20 @@ public class ArtistRecomendation implements Serializable {
     private long userId;
     private Boolean liked;
 
-    public ArtistRecomendation(Long id, long artistId, long userId, Boolean liked) {
+    public ArtistRecommendation(Long id, long artistId, long userId, Boolean liked) {
         this.id = id;
         this.artistId = artistId;
         this.userId = userId;
         this.liked = liked;
     }
 
-    public ArtistRecomendation(long artistId, long userId, Boolean liked) {
+    public ArtistRecommendation(long artistId, long userId, Boolean liked) {
         this.artistId = artistId;
         this.userId = userId;
         this.liked = liked;
     }
 
-    public ArtistRecomendation() {
+    public ArtistRecommendation() {
     }
 
     public Long getId() {
@@ -72,7 +72,7 @@ public class ArtistRecomendation implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ArtistRecomendation that = (ArtistRecomendation) o;
+        ArtistRecommendation that = (ArtistRecommendation) o;
         return artistId == that.artistId && userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
     }
 

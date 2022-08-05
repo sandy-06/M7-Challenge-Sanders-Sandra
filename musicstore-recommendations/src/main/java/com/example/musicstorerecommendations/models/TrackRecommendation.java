@@ -7,13 +7,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "album_recommendation")
-@JsonIgnoreProperties
-public class AlbumRecomendation implements Serializable {
-    @Id
-    @Column(name = "album_recommendation_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "track_recommendation")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
+public class TrackRecommendation implements Serializable {
+
+    @Id
+    @Column(name = "track_recommendation_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "user_id")
@@ -21,18 +22,18 @@ public class AlbumRecomendation implements Serializable {
 
     private Boolean liked;
 
-    public AlbumRecomendation(Long id, long userId, Boolean liked) {
+    public TrackRecommendation(Long id, long userId, Boolean liked) {
         this.id = id;
         this.userId = userId;
         this.liked = liked;
     }
 
-    public AlbumRecomendation(long userId, Boolean liked) {
+    public TrackRecommendation(long userId, Boolean liked) {
         this.userId = userId;
         this.liked = liked;
     }
 
-    public AlbumRecomendation() {
+    public TrackRecommendation() {
     }
 
     public Long getId() {
@@ -63,7 +64,7 @@ public class AlbumRecomendation implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AlbumRecomendation that = (AlbumRecomendation) o;
+        TrackRecommendation that = (TrackRecommendation) o;
         return userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
     }
 
@@ -74,7 +75,7 @@ public class AlbumRecomendation implements Serializable {
 
     @Override
     public String toString() {
-        return "AlbumRecomendation{" +
+        return "TrackRecomendation{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", liked=" + liked +

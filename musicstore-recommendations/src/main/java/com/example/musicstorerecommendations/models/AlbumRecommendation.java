@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "track_recommendation")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
-public class TrackRecomendation implements Serializable {
-
+@Table(name = "album_recommendation")
+@JsonIgnoreProperties
+public class AlbumRecommendation implements Serializable {
     @Id
-    @Column(name = "track_recommendation_id")
+    @Column(name = "album_recommendation_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(name = "user_id")
@@ -22,18 +22,18 @@ public class TrackRecomendation implements Serializable {
 
     private Boolean liked;
 
-    public TrackRecomendation(Long id, long userId, Boolean liked) {
+    public AlbumRecommendation(Long id, long userId, Boolean liked) {
         this.id = id;
         this.userId = userId;
         this.liked = liked;
     }
 
-    public TrackRecomendation(long userId, Boolean liked) {
+    public AlbumRecommendation(long userId, Boolean liked) {
         this.userId = userId;
         this.liked = liked;
     }
 
-    public TrackRecomendation() {
+    public AlbumRecommendation() {
     }
 
     public Long getId() {
@@ -64,7 +64,7 @@ public class TrackRecomendation implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TrackRecomendation that = (TrackRecomendation) o;
+        AlbumRecommendation that = (AlbumRecommendation) o;
         return userId == that.userId && Objects.equals(id, that.id) && Objects.equals(liked, that.liked);
     }
 
@@ -75,10 +75,13 @@ public class TrackRecomendation implements Serializable {
 
     @Override
     public String toString() {
-        return "TrackRecomendation{" +
+        return "AlbumRecomendation{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", liked=" + liked +
                 '}';
     }
+
+
+
 }
