@@ -10,11 +10,9 @@ import java.util.List;
 
 @RestController
 public class TrackController {
-    private TrackRepository repo;
     @Autowired
-    public TrackController(TrackRepository repo) {
-        this.repo = repo;
-    }
+    private TrackRepository repo;
+
 
     @GetMapping("/tracks")
     @ResponseStatus(HttpStatus.OK)

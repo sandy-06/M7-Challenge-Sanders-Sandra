@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(AlbumController.class)
+@WebMvcTest(TrackController.class)
 @AutoConfigureMockMvc(addFilters = false)
 public class TrackControllerTest {
 
@@ -56,33 +57,40 @@ public class TrackControllerTest {
     @Autowired
     private ObjectMapper mapper = new ObjectMapper();
 
-
+//   String trackJson;
+//    List<Track> trackList = new ArrayList<>();
     @Before
     public void setUp() throws Exception {
-        setUpTrackRepositoryMock();
+       setUpTrackRepositoryMock();
+//        Track track = new Track(2L,4L, "Fun, Fun,Fun", 3);
+//        trackJson = mapper.writeValueAsString(track);
+//        trackList.add(track);
     }
-    private void setUpTrackRepositoryMock() {
-        Track track = new Track(2L, "Fun, Fun,Fun", 3);
-        List<Track> tracks = Arrays.asList(track);
-        when(trackRepo.findAll()).thenReturn(tracks);
-        when(trackRepo.findById(2L)).thenReturn(Optional.of(track));
-        when(trackRepo.save(track)).thenReturn(track);
+   private void setUpTrackRepositoryMock() {
+       Track track = new Track(2L,4L, "Fun, Fun,Fun", 3);
+        Track trackWithoutId = new Track( 4L,"Fun, Fun,Fun", 3);
+        List<Track> trackList = Arrays.asList(track);
+        doReturn(trackList).when(trackRepo).findAll();
+
+        doReturn(track).when(trackRepo).save(track);
     }
 
     @Test
     public void testGetAllTracks() throws Exception {
-        Track track = new Track(2L, "Fun, Fun,Fun", 3);
-        List<Track> tracks = Arrays.asList(track);
-        ResultActions resultActions = mockMvc.perform(get("/tracks"))
+        Track track = new Track(2L, 4L, "Fun, Fun,Fun", 3);
+        List<Track> trackList = new ArrayList<>();
+        trackList.add(track);
+        doReturn(trackList).when(trackRepo).findAll();
+        mockMvc.perform(get("/tracks"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(track)));
+                .andExpect(content().json(mapper.writeValueAsString(trackList)));
     }
     @Test
     public void testGetTrackById() throws Exception {
-        Track track = new Track(2L, "Fun, Fun,Fun", 3);
-        List<Track> tracks = Arrays.asList(track);
-        ResultActions resultActions = mockMvc.perform(get("/tracks/2"))
+        Track track = new Track(2L,2L, "Fun, Fun,Fun", 3);
+        doReturn(Optional.of(track)).when(trackRepo).findById(2L);
+        mockMvc.perform(get("/tracks/2"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(track)));
@@ -90,33 +98,29 @@ public class TrackControllerTest {
     @Test
     public void testCreateTrack() throws Exception {
         Track track = new Track(2L, "Fun, Fun,Fun", 3);
-        List<Track> tracks = Arrays.asList(track);
-        ResultActions resultActions = mockMvc.perform(post("/tracks")
+        doReturn(track).when(trackRepo).save(track);
+        mockMvc.perform(post("/tracks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(track)))
                 .andDo(print())
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().json(mapper.writeValueAsString(track)));
     }
     @Test
     public void testUpdateTrack() throws Exception {
         Track track = new Track(2L, "Fun, Fun,Fun", 3);
-        List<Track> tracks = Arrays.asList(track);
-        ResultActions resultActions = mockMvc.perform(put("/tracks/2")
+        mockMvc.perform(put("/tracks/2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(track)))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(track)));
+                .andExpect(status().isOk());
+
     }
     @Test
     public void testDeleteTrack() throws Exception {
-        Track track = new Track(2L, "Fun, Fun,Fun", 3);
-        List<Track> tracks = Arrays.asList(track);
-        ResultActions resultActions = mockMvc.perform(delete("/tracks/2"))
+        mockMvc.perform(delete("/tracks/2"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(track)));
+                .andExpect(status().isOk());
     }
 
     @After

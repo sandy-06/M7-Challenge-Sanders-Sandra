@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 import static java.awt.Color.orange;
@@ -76,7 +77,7 @@ public class LabelControllerTest {
     public void testGetAllLabels() throws Exception {
         Label label = new Label(2L, "Sony", "sony.com");
         List<Label> labelList = Arrays.asList(label);
-
+        doReturn(labelList).when(labelRepo).findAll();
         mockMvc.perform(get("/labels"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -86,6 +87,8 @@ public class LabelControllerTest {
     @Test
     public void testGetLabelById() throws Exception {
         Label label = new Label(2L, "Sony", "sony.com");
+
+        doReturn (Optional.of(label)).when(labelRepo).findById(2L);
         mockMvc.perform(get("/labels/2"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -94,11 +97,12 @@ public class LabelControllerTest {
     @Test
     public void createLabel() throws Exception {
         Label label = new Label(2L, "Sony", "sony.com");
+        doReturn(label).when(labelRepo).save(label);
         mockMvc.perform(post("/labels")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(label)))
                 .andDo(print())
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().json(mapper.writeValueAsString(label)));
     }
     @Test
@@ -108,8 +112,8 @@ public class LabelControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(label)))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(label)));
+                .andExpect(status().isOk());
+
     }
     @Test
     public void deleteLabel() throws Exception {

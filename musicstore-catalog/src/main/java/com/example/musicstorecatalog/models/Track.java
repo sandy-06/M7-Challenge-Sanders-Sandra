@@ -39,6 +39,9 @@ public class Track  implements Serializable {
     public Track() {
     }
 
+    public Track(String s, int i) {
+    }
+
     public long getId() {
         return id;
     }
