@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
 public class TrackRecommendationController {
     private TrackRecommendationRepository repo;
 
@@ -19,20 +19,20 @@ public class TrackRecommendationController {
     }
 
 
-    @GetMapping("/trackRecommendation")
+    @GetMapping("/trackRecommendations")
     @ResponseStatus(HttpStatus.OK)
-    public List<TrackRecommendation> getAllAlbums() {
+    public List<TrackRecommendation> getAllTrack() {
 
         return repo.findAll();
     }
 
-    @GetMapping("/trackRecommendation/{id}")
+    @GetMapping("/trackRecommendations/{id}")
     @ResponseStatus(HttpStatus.OK)
     public TrackRecommendation getTrackRecommendation(@PathVariable long id) {
         return repo.findById(id).get();
     }
 
-    @PostMapping("/trackRecommendation")
+    @PostMapping("/trackRecommendations")
     @ResponseStatus(HttpStatus.CREATED)
     public TrackRecommendation createTrackRecommendation(@RequestBody TrackRecommendation trackRecommendation) {
         return repo.save(trackRecommendation);
@@ -44,7 +44,7 @@ public class TrackRecommendationController {
         return repo.save(trackRecommendation);
     }
 
-    @DeleteMapping("/trackRecommendation/{id}")
+    @DeleteMapping("/trackRecommendations/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTrackRecommendation(@PathVariable long id) {
         repo.deleteById(id);

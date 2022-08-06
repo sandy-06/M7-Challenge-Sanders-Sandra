@@ -1,6 +1,5 @@
 package com.example.musicstorerecommendations.controller;
 
-
 import com.example.musicstorerecommendations.models.LabelRecommendation;
 
 import com.example.musicstorerecommendations.respository.LabelRecommendationRepository;

@@ -13,12 +13,6 @@ import java.util.Optional;
 public class ArtistRecommendationController {
     @Autowired
     private ArtistRecommendationRepository repo;
-
-
-   // public ArtistRecommendationController(ArtistRecommendationRepository repo) {
-    //    this.repo = repo;
-  //  }
-
     @GetMapping("/artistRecommendations")
     @ResponseStatus(HttpStatus.OK)
     public List<ArtistRecommendation> getAllArtists() {
@@ -26,7 +20,7 @@ public class ArtistRecommendationController {
         return repo.findAll();
         }
 
-    @RequestMapping(value = "/artistRecommendation/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/artistRecommendations/{id}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public ArtistRecommendation findOneArtistRecommendation(@PathVariable Long id){
         Optional<ArtistRecommendation> artist = repo.findById(id);
@@ -42,7 +36,7 @@ public class ArtistRecommendationController {
     }
 
     @PostMapping("/artistRecommendations")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public ArtistRecommendation createArtistRecommendation(@RequestBody ArtistRecommendation artistRecommendation) {
         return repo.save(artistRecommendation);
     }
