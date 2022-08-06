@@ -3,7 +3,6 @@ package com.example.musicstorecatalog.contoller;
 import com.example.musicstorecatalog.models.Album;
 import com.example.musicstorecatalog.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
