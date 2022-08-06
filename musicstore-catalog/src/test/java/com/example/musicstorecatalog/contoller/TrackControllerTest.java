@@ -57,14 +57,11 @@ public class TrackControllerTest {
     @Autowired
     private ObjectMapper mapper = new ObjectMapper();
 
-//   String trackJson;
-//    List<Track> trackList = new ArrayList<>();
+
     @Before
     public void setUp() throws Exception {
        setUpTrackRepositoryMock();
-//        Track track = new Track(2L,4L, "Fun, Fun,Fun", 3);
-//        trackJson = mapper.writeValueAsString(track);
-//        trackList.add(track);
+
     }
    private void setUpTrackRepositoryMock() {
        Track track = new Track(2L,4L, "Fun, Fun,Fun", 3);

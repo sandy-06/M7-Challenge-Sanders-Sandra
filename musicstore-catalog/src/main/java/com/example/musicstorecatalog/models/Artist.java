@@ -1,12 +1,8 @@
 package com.example.musicstorecatalog.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.mapping.Set;
-
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
 
 @Entity

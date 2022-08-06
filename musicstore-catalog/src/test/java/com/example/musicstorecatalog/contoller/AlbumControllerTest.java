@@ -1,6 +1,7 @@
 package com.example.musicstorecatalog.contoller;
 
 import com.example.musicstorecatalog.models.Album;
+import com.example.musicstorecatalog.models.Label;
 import com.example.musicstorecatalog.repository.AlbumRepository;
 import com.example.musicstorecatalog.repository.ArtistRepository;
 import com.example.musicstorecatalog.repository.LabelRepository;
@@ -23,6 +24,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -126,6 +129,17 @@ public class AlbumControllerTest {
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
+//    public void getAlbumById() throws Exception {
+//        LocalDate date = LocalDate.of(2020, Month.JANUARY, 1);
+//        // Arrange
+//        Album album = new Album(121L, "Best of Billy Joel", 50L, date, 24L, new BigDecimal("1.19"));
+//        doReturn (Optional.of(album)).when(repository).findById(121L);
+//        // Assert
+//        mockMvc.perform(get("/albums/121"))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//                .andExpect(content().json(mapper.writeValueAsString(album)));
+//    }
     @After
     public void tearDown() throws Exception {
     }

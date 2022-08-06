@@ -1,7 +1,6 @@
 package com.example.musicstorecatalog.contoller;
 
 import com.example.musicstorecatalog.models.Label;
-import com.example.musicstorecatalog.repository.AlbumRepository;
 import com.example.musicstorecatalog.repository.LabelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
